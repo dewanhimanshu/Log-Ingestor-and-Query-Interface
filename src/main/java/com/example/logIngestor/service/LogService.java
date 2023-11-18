@@ -38,6 +38,10 @@ public class LogService {
       return null;
     }
 
-    return new LogSearchResponseDto(logDao.searchLogs(queryParams,userRole.getAllowedAccessFields()));
+    String startDate = queryParams.getOrDefault("startDate",null);
+    String endDate = queryParams.getOrDefault("endDate",null);
+
+
+    return new LogSearchResponseDto(logDao.searchLogs(queryParams,userRole.getAllowedAccessFields(),startDate,endDate));
   }
 }

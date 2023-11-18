@@ -22,31 +22,36 @@ public class LogDao {
 
   public static final List<String> ALL_SEARCH_KEYS = Arrays.asList("level","message","resourceId","timestamp","traceId","spanId","commit","meta.parentResourceId");
 
-  public List<Log> searchLogs(Map<String,String> searchCriteria,List<String> allowedSearchKeys){
+  public List<Log> searchLogs(Map<String,String> searchCriteria,List<String> allowedSearchKeys,String startDate,String endDate){
     TextCriteria textCriteria = null;
     Criteria criteria = new Criteria();
 
+    //add date filters
+    if(startDate != null && endDate != null){
+      criteria.and("timestamp").gte(LocalDateTime.parse(startDate))
+          .lte(LocalDateTime.parse(endDate));
+    }else if(startDate != null){
+      criteria.and("timestamp").gte(LocalDateTime.parse(startDate));
+    }else if(endDate != null){
+      criteria.and("timestamp").lte(LocalDateTime.parse(endDate));
+    }
 
 
     for(Map.Entry<String,String> entry : searchCriteria.entrySet()){
       String key = entry.getKey();
       String value = entry.getValue();
 
+      //filter for full text searching
       if(key.equals("text")){
         textCriteria = TextCriteria.forDefaultLanguage().matchingAny(value);
         continue;
       }
 
-      if(key.equals("startDate")){
-        criteria.and("timestamp").gte(LocalDateTime.parse(value));
+      if(key.equals("startDate") || key.equals("endDate")){
         continue;
       }
 
-      if(key.equals("endDate")){
-        criteria.and("timestamp").lte(LocalDateTime.parse(value));
-        continue;
-      }
-
+      //add filters based on allowed access
       if(allowedSearchKeys.contains(key)){
         criteria =  criteria.and(key).is(value);
       }

@@ -33,8 +33,7 @@ public class LogController {
 
   @GetMapping("/log/search")
   public ResponseEntity<LogSearchResponseDto> searchLogFromDb(
-      @RequestParam Map<String,String> queryParams,
-      @RequestHeader(defaultValue = "false") boolean isHistorical,
+  @RequestParam Map<String,String> queryParams,
       @RequestHeader(defaultValue = "0") String userId
   ){
      if(userId.equals("0")){
@@ -43,8 +42,6 @@ public class LogController {
 
       return ResponseEntity.ok().body(logService.searchLogsInMongo(queryParams,userId));
 
-
-    //return ResponseEntity.status(HttpStatus.OK).build();
   }
 
 }

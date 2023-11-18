@@ -35,7 +35,6 @@ public class LogDao {
       criteria.and(TIMESTAMP).lte(LocalDateTime.parse(endDate));
     }
 
-
     for(Map.Entry<String,String> entry : searchCriteria.entrySet()){
       String key = entry.getKey();
       String value = entry.getValue();

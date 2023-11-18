@@ -32,15 +32,14 @@ public class LogController {
 
   @GetMapping("/log/search")
   public ResponseEntity<LogSearchResponseDto> searchLogFromDb(
-  @RequestParam Map<String,String> queryParams,
+      @RequestParam Map<String,String> queryParams,
       @RequestHeader(defaultValue = "0") String userId
   ){
      if(userId.equals("0")){
        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
      }
 
-      return ResponseEntity.ok().body(logService.searchLogsInMongo(queryParams,userId));
-
+     return ResponseEntity.ok().body(logService.searchLogsInMongo(queryParams,userId));
   }
 
 }

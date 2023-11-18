@@ -1,6 +1,7 @@
 package com.example.logIngestor.dao;
 
 import com.example.logIngestor.entity.Log;
+import com.mongodb.client.model.Filters;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.TextCriteria;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -23,19 +25,29 @@ public class LogDao {
 
 
   public List<Log> searchLogs(Map<String,String> searchCriteria){
+    TextCriteria textCriteria = null;
     Criteria criteria = new Criteria();
 
     for(Map.Entry<String,String> entry : searchCriteria.entrySet()){
       String key = entry.getKey();
       String value = entry.getValue();
 
+      if(key.equals("text")){
+        textCriteria = TextCriteria.forDefaultLanguage().matchingAny(value);
+        continue;
+      }
+
       if(ALLOWED_SEARCH_KEYS.contains(key)){
-        criteria.and(key).is(value);
+        criteria =  criteria.and(key).is(value);
       }
 
     }
 
     Query query = new Query(criteria);
+
+    if(textCriteria != null){
+      query.addCriteria(textCriteria);
+    }
 
     return mongoTemplate.find(query, Log.class, "log");
   }

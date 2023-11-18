@@ -8,6 +8,7 @@ import lombok.Data;
 import nonapi.io.github.classgraph.json.Id;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
@@ -20,8 +21,10 @@ public class Log implements Serializable {
   private String id;
 
   @Indexed
+  @TextIndexed
   private LogLevel level;
 
+  @TextIndexed
   private String message;
 
   private String resourceId;

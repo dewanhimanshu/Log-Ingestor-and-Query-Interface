@@ -19,7 +19,7 @@ public class LogDao {
 
   private final MongoTemplate mongoTemplate;
 
-  private final static String TIMESTAMP = "TIMESTAMP";
+  private final static String TIMESTAMP = "timestamp";
 
   public List<Log> searchLogs(Map<String,String> searchCriteria,List<String> allowedSearchKeys,String startDate,String endDate){
     TextCriteria textCriteria = null;

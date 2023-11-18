@@ -29,7 +29,7 @@ public class Log implements Serializable {
 
   private String resourceId;
 
-  private String timestamp;
+  private LocalDateTime timestamp;
 
   private String traceId;
 

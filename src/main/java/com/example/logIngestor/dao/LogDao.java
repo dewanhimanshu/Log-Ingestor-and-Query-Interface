@@ -2,7 +2,11 @@ package com.example.logIngestor.dao;
 
 import com.example.logIngestor.entity.Log;
 import com.mongodb.client.model.Filters;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
@@ -28,12 +32,24 @@ public class LogDao {
     TextCriteria textCriteria = null;
     Criteria criteria = new Criteria();
 
+
+
     for(Map.Entry<String,String> entry : searchCriteria.entrySet()){
       String key = entry.getKey();
       String value = entry.getValue();
 
       if(key.equals("text")){
         textCriteria = TextCriteria.forDefaultLanguage().matchingAny(value);
+        continue;
+      }
+
+      if(key.equals("startDate")){
+        criteria.and("timestamp").gte(LocalDateTime.parse(value));
+        continue;
+      }
+
+      if(key.equals("endDate")){
+        criteria.and("timestamp").lte(LocalDateTime.parse(value));
         continue;
       }
 
@@ -51,4 +67,5 @@ public class LogDao {
 
     return mongoTemplate.find(query, Log.class, "log");
   }
+
 }

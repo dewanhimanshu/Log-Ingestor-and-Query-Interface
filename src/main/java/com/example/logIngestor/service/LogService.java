@@ -6,6 +6,7 @@ import com.example.logIngestor.kafka.KafkaProducer;
 import com.example.logIngestor.entity.Log;
 import com.example.logIngestor.model.LogSearchResponseDto;
 import com.example.logIngestor.repository.RoleRepository;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ public class LogService {
   private final LogDao logDao;
 
   private final RoleRepository roleRepository;
+
 
   public void addLogToKafka(Log logMessage){
     log.info("log received : {} ",logMessage);

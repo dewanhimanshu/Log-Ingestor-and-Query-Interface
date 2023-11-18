@@ -20,8 +20,7 @@ public class LogDao {
 
   private final MongoTemplate mongoTemplate;
 
-  public static final List<String> ALLOWED_SEARCH_KEYS = Arrays.asList("level","message","resourceId","timestamp","traceId","spanId","commit","meta.parentResourceId");
-
+  public static final List<String> ALL_SEARCH_KEYS = Arrays.asList("level","message","resourceId","timestamp","traceId","spanId","commit","meta.parentResourceId");
 
   public List<Log> searchLogs(Map<String,String> searchCriteria,List<String> allowedSearchKeys){
     TextCriteria textCriteria = null;

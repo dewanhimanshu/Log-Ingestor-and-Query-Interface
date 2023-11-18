@@ -1,12 +1,8 @@
 package com.example.logIngestor.dao;
 
 import com.example.logIngestor.entity.Log;
-import com.mongodb.client.model.Filters;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
@@ -27,8 +23,7 @@ public class LogDao {
   public static final List<String> ALLOWED_SEARCH_KEYS = Arrays.asList("level","message","resourceId","timestamp","traceId","spanId","commit","meta.parentResourceId");
 
 
-
-  public List<Log> searchLogs(Map<String,String> searchCriteria){
+  public List<Log> searchLogs(Map<String,String> searchCriteria,List<String> allowedSearchKeys){
     TextCriteria textCriteria = null;
     Criteria criteria = new Criteria();
 
@@ -53,7 +48,7 @@ public class LogDao {
         continue;
       }
 
-      if(ALLOWED_SEARCH_KEYS.contains(key)){
+      if(allowedSearchKeys.contains(key)){
         criteria =  criteria.and(key).is(value);
       }
 

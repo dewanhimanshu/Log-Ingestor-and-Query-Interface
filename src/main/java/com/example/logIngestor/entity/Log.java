@@ -1,5 +1,6 @@
-package com.example.logIngestor.model;
+package com.example.logIngestor.entity;
 
+import com.example.logIngestor.model.LogLevel;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Map;

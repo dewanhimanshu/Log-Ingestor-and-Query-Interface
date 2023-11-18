@@ -1,7 +1,7 @@
 package com.example.logIngestor.kafka;
 
 import com.example.logIngestor.config.KafkaConfig;
-import com.example.logIngestor.model.Log;
+import com.example.logIngestor.entity.Log;
 import com.example.logIngestor.repository.LogRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

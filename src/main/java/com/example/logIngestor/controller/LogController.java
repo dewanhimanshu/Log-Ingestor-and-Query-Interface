@@ -1,12 +1,14 @@
 package com.example.logIngestor.controller;
 
-import com.example.logIngestor.model.Log;
+import com.example.logIngestor.entity.Log;
+import com.example.logIngestor.model.LogLevel;
+import com.example.logIngestor.model.LogSearchResponseDto;
 import com.example.logIngestor.service.LogService;
-import java.util.List;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -27,6 +29,18 @@ public class LogController {
   ) {
     logService.addLogToKafka(log);
     return ResponseEntity.status(HttpStatus.OK).build();
+  }
+
+  @GetMapping("/log/search")
+  public ResponseEntity<LogSearchResponseDto> searchLogFromDb(
+      @RequestParam Map<String,String> queryParams,
+      @RequestHeader(defaultValue = "false") boolean isHistorical
+  ){
+
+      return ResponseEntity.ok().body(logService.searchLogsInMongo(queryParams));
+
+
+    //return ResponseEntity.status(HttpStatus.OK).build();
   }
 
 }

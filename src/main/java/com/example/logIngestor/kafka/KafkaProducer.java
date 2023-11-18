@@ -1,7 +1,7 @@
 package com.example.logIngestor.kafka;
 
 import com.example.logIngestor.config.KafkaConfig;
-import com.example.logIngestor.model.Log;
+import com.example.logIngestor.entity.Log;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;

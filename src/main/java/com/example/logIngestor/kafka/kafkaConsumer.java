@@ -16,8 +16,6 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class kafkaConsumer {
 
-  private final KafkaConfig kafkaConfig;
-
   private final LogRepository logRepository;
 
   private final ElasticLogRepository elasticLogRepository;
@@ -30,7 +28,6 @@ public class kafkaConsumer {
 
     logRepository.save(logMessage);
     elasticLogRepository.save(objectMapper.convertValue(logMessage, ElasticLog.class));
-
   }
 
 }

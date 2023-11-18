@@ -2,7 +2,6 @@ package com.example.logIngestor.dao;
 
 import com.example.logIngestor.entity.Log;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +19,7 @@ public class LogDao {
 
   private final MongoTemplate mongoTemplate;
 
-  public static final List<String> ALL_SEARCH_KEYS = Arrays.asList("level","message","resourceId","timestamp","traceId","spanId","commit","meta.parentResourceId");
+  private final static String TIMESTAMP = "TIMESTAMP";
 
   public List<Log> searchLogs(Map<String,String> searchCriteria,List<String> allowedSearchKeys,String startDate,String endDate){
     TextCriteria textCriteria = null;
@@ -28,12 +27,12 @@ public class LogDao {
 
     //add date filters
     if(startDate != null && endDate != null){
-      criteria.and("timestamp").gte(LocalDateTime.parse(startDate))
+      criteria.and(TIMESTAMP).gte(LocalDateTime.parse(startDate))
           .lte(LocalDateTime.parse(endDate));
     }else if(startDate != null){
-      criteria.and("timestamp").gte(LocalDateTime.parse(startDate));
+      criteria.and(TIMESTAMP).gte(LocalDateTime.parse(startDate));
     }else if(endDate != null){
-      criteria.and("timestamp").lte(LocalDateTime.parse(endDate));
+      criteria.and(TIMESTAMP).lte(LocalDateTime.parse(endDate));
     }
 
 

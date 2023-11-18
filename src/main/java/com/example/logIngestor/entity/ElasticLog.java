@@ -4,11 +4,8 @@ import com.example.logIngestor.model.LogLevel;
 import java.time.LocalDateTime;
 import java.util.Map;
 import lombok.Data;
-import nonapi.io.github.classgraph.json.Id;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.index.TextIndexed;
+
 
 @Document(indexName = "log_index")
 @Data

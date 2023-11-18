@@ -1,7 +1,6 @@
 package com.example.logIngestor.controller;
 
 import com.example.logIngestor.entity.Log;
-import com.example.logIngestor.model.LogLevel;
 import com.example.logIngestor.model.LogSearchResponseDto;
 import com.example.logIngestor.service.LogService;
 import java.util.Map;

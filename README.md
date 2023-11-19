@@ -4,6 +4,11 @@
 
 November 19, 2023 
 
+⭐ System Design Video Link : https://www.youtube.com/watch?v=OJuzsBG6yvs
+
+⭐ Project Demo Video Link : https://www.youtube.com/watch?v=7WzSOqjJrAA
+
+
 <aside>
 💡 This project is submitted as a part of SDE-1 and SDE Intern Assignment                                     **For any details related to this or project setup feel free to contact : himanshudewan.mca20.du@gmail.com**
 
